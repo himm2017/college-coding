@@ -1,1 +1,124 @@
+import mysql.connector as mysql
+
+db = mysql.connect(host="localhost",user="root",password="",database="college")
+command_handler = db.cursor(buffered=True)
+
+def admin_session():
+    while 1:
+        print("")
+        print("Admin Menu")
+        print("1.  Register New Student")
+        print("2.  Register New Professor")
+        print ("3. Register the courses")
+        print("4.  Delete Existing  Student")           
+        print("5.  Delete Existing Professor")
+        print ("6. Delete Existing courses")        
+        print("Logout")
+
+        user_option= input (str("option :"))
+        if user_option =="1":
+            print("")
+            print("Register New Student")
+            username=input(str("Student username:"))
+            password=input(str("Student password :"))
+            query vals =(username,password)
+            command_handler.execute("insert into users (username,password, privilege)Values(Xs ,Xs,'Proffessor')" ,query_vals) 
+            db commit()
+            print(username +"has been registered as a Professor")   
+
+        elif user_option =="2":
+            print("") 
+            print("Register New Professor")
+            username=input(str("Professor username:"))
+            password=input(str("Proffessor password :"))
+            query vals =(username,password)
+            command_handler.execute("insert into users (username,password, privilege)Values(Xs ,Xs,'student')" ,query_vals) 
+            db commit()
+            print(username +"has been registered as a student")   
+
+        elif user_option =="3":
+            print("") 
+            print("Register the courses")
+            username=input(str(" Course username:"))
+            password=input(str("Course password :"))
+            query_vals =(username,password)
+            command_handler.execute("insert into users (username,password, privilege)Values(Xs ,Xs,'Course')" ,query_vals) 
+            db commit()
+            print(username +"has been registered as a Course") 
+
+            elif user_option =="4":
+                 print("") 
+                 print("Delete Exixting Students Account")
+                 username =input(str("Student username: "))
+                 query_vals =(username,"student")
+                 command_handler.execute("Delete FROM users WHERE username = % And privilege =%s" ,querry_vals)
+                 db_commit()
+                 if command_handler.rowcount<1:
+                    print("user not found")
+                 else:
+                    print("username+"has been deleted")      
+
+            elif user_option == "5":
+                 print("") 
+                 print("Delete Exixting Proffessors Account")
+                username =input(str("Proffessors username: "))
+                query_vals =(username,"Professor")
+                command_handler.execute("Delete FROM users WHERE username = % And privilege =%s" ,querry_vals)
+                db_commit()
+                if command_handler.rowcount<1:
+                   print("user not found")
+                else:
+                   print("username+"has been deleted")   
+
+            elif user_option == "6":
+                 print("") 
+                 print("Delete Exixting courses Account")
+                username =input(str("courses username: "))
+                query_vals =(username,"Courses")
+                command_handler.execute("Delete FROM users WHERE username = % And privilege =%s" ,querry_vals)
+                db_commit()
+                if command_handler.rowcount<1:
+                   print("user not found")
+                else:
+                   print("username+"has been deleted")  
+            elif user_option =="6":
+                break
+            else:
+                print("not valid option selected")       
+
+   
+def auth_admin():
+    print("")
+    print("Admin login")
+    print("")
+    username=input(str("Username :"))
+    password= input(str("Password:"))
+    if username == "admin":
+       if password == "password" :
+           admin_session()
+       else:
+           print("incorrect password !")
+    else:
+        print("login details are not recognised")           
+def main():
+    while 1:
+        print("Welcome to the college system")
+        print("")
+        print("1.Login as student")
+        print("2.Login as teacher")
+        print("3.Login as admin")
+
+        user_option = input(str("Option :"))
+        if user_option =="1":
+            print("Student login")
+        elif user_option == "2" :
+              print("Teacher login")
+        elif user_option =="3":
+              print("Admin login")     
+        else:
+            print("no valid option was selected") 
+
+
+main()
+
 
